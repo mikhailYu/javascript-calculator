@@ -21,7 +21,6 @@ let btnDecimal = document.querySelector(".btnDecimal");
 let numDisplay = document.querySelector(".numDisplay");
 let numDisplayText;
 let displayValue = "0";
-let inputMemory;
 
 let firstValue = 0;
 let secondValue = 0;
@@ -91,56 +90,57 @@ if(isAdd == true){
 }
 };
 
+function deleteDigit() {
+    displayValue = displayValue.toString();
+    if (displayValue.length == 1 && displayValue !== 0){
+        displayValue = 0;
+        updateDisplay();
+    } else if (displayValue !== 0) {
+    displayValue = displayValue.slice(0,-1);
+    updateDisplay();
+    };
+};
+
 // button listeners
 
 btn1.addEventListener("click", () => {
-inputMemory = 1;
-numInput();
+numInput(1);
 });
 
 btn2.addEventListener("click", () => {
-inputMemory = 2;
-numInput();
+numInput(2);
 });
 
 btn3.addEventListener("click", () => {
-inputMemory = 3;
-numInput();
+numInput(3);
 });
 
 btn4.addEventListener("click", () => {
-inputMemory = 4;
-numInput();
+numInput(4);
 });
 
 btn5.addEventListener("click", () => {
-inputMemory = 5;
-numInput();
+numInput(5);
 });
 
 btn6.addEventListener("click", () => {
-inputMemory = 6;
-numInput();
+numInput(6);
 });
 
 btn7.addEventListener("click", () => {
-inputMemory = 7;
-numInput();
+numInput(7);
 });
 
 btn8.addEventListener("click", () => {
-inputMemory = 8;
-numInput();
+numInput(8);
 });
 
 btn9.addEventListener("click", () => {
-inputMemory = 9;
-numInput();
+numInput(9);
 });
 
 btn0.addEventListener("click", () => {
-inputMemory = 0;
-numInput();
+numInput(0);
 });
 
 btnClear.addEventListener("click", fullReset);
@@ -148,7 +148,6 @@ btnClear.addEventListener("click", fullReset);
 btnEquals.addEventListener("click", () => {
     operate();
 });
-
 
 
 btnAdd.addEventListener("click", () => {
@@ -185,12 +184,69 @@ saveVal(1);
 resetDisplay();
 });
 
+btnDEL.addEventListener("click", deleteDigit);
+
+//keyboard support
+document.addEventListener('keydown', (event) => {
+if (event.code == "Digit0"){
+    numInput(0);
+} else if (event.code == "Digit1"){
+    numInput(1);
+} else if (event.code == "Digit2"){
+    numInput(2); 
+} else if (event.code == "Digit3"){
+    numInput(3); 
+} else if (event.code == "Digit4"){
+    numInput(4); 
+} else if (event.code == "Digit5"){
+    numInput(5); 
+} else if (event.code == "Digit6"){
+    numInput(6); 
+} else if (event.code == "Digit7"){
+    numInput(7); 
+} else if (event.code == "Digit8"){
+    numInput(8); 
+} else if (event.code == "Digit9"){
+    numInput(9); 
+} else if (event.code == "NumpadAdd"){
+    isReset= false;
+    resetOperators();
+    isAdd = true;
+    saveVal(1);
+    resetDisplay();
+} else if (event.code == "NumpadSubtract"){
+    isReset= false;
+    resetOperators();
+    isSubtract = true;
+    saveVal(1);
+    resetDisplay();
+} else if (event.code == "NumpadMultiply"){
+    isReset= false;
+    resetOperators();
+    isMultiply = true;
+    saveVal(1);
+    resetDisplay();
+} else if (event.code == "NumpadDivide"){
+    isReset= false;
+    resetOperators();
+    isDivide = true;
+    saveVal(1);
+    resetDisplay();
+} else if (event.code == "Equal"){
+    operate();
+} else if (event.code == "Enter"){
+    fullReset();
+} else if (event.code == "Backspace"){
+    deleteDigit();
+};
+});
 
 
 // number display
 
-function numInput(){
+function numInput(inputMemory){
 if (isReset == false){
+displayValue = displayValue.toString();
 displayValue = displayValue.concat(inputMemory);
 updateDisplay();
 } else {
@@ -215,7 +271,7 @@ function saveVal(value){
         console.log("first value = " + firstValue)
     } else if (value == 2){
         secondValue = parseInt(displayValue);
-        console.log("first value = " + firstValue)
+        console.log("first value = " + firstValue);
         console.log("second value = " + secondValue)
     }
 };
@@ -224,7 +280,7 @@ function dividedBy0 (){
     if (numDisplay.hasChildNodes()){
     numDisplay.removeChild(numDisplayText);
     }
-    displayValue = "LMAO";
+    displayValue = "🙃";
     numDisplayText = document.createTextNode(displayValue);
     numDisplay.appendChild(numDisplayText)
 };
