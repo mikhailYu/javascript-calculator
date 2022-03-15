@@ -17,6 +17,7 @@ let btnEquals = document.querySelector(".btnEquals");
 let btnClear = document.querySelector(".btnClear");
 let btnDEL = document.querySelector(".btnDEL");
 let btnDecimal = document.querySelector(".btnDecimal");
+let btnNegative = document.querySelector(".btnNegative");
 
 let numDisplay = document.querySelector(".numDisplay");
 let numDisplayText;
@@ -32,6 +33,8 @@ let isMultiply = false;
 let isDivide = false;
 
 
+
+
 fullReset();
 
 function fullReset(){
@@ -40,6 +43,7 @@ function fullReset(){
     firstValue = 0;
     secondValue = 0;
     isReset = false;
+    
 };
 
 function resetDisplay(){
@@ -47,8 +51,9 @@ function resetDisplay(){
     numDisplay.removeChild(numDisplayText);
     };
     displayValue = "0";
-    numDisplayText = document.createTextNode(parseInt("0"));
+    numDisplayText = document.createTextNode(parseFloat("0"));
     numDisplay.appendChild(numDisplayText);
+    
 };
 
 function resetOperators(){
@@ -56,7 +61,7 @@ function resetOperators(){
     isSubtract = false;
     isMultiply = false;
     isDivide = false;
-}
+};
 
 
 // operator functions
@@ -83,10 +88,18 @@ if(isAdd == true){
         dividedBy0();
     } else {
     displayValue = firstValue / secondValue;
+    console.log ("answer divide = "+ displayValue);
     updateDisplay();
     isReset = true;
     resetOperators();
     }
+}
+};
+
+function addDecimal(){
+if (displayValue % 1 === 0){
+    displayValue = displayValue.concat(".");
+    updateDisplay();
 }
 };
 
@@ -99,6 +112,20 @@ function deleteDigit() {
     displayValue = displayValue.slice(0,-1);
     updateDisplay();
     };
+};
+
+function subtractOperator(){
+    isReset= false;
+    resetOperators();
+    isSubtract = true;
+    saveVal(1);
+    resetDisplay();
+    
+};
+
+function convertNegative(){
+    displayValue = displayValue * -1;
+    updateDisplay();
 };
 
 // button listeners
@@ -159,11 +186,7 @@ resetDisplay();
 });
 
 btnSubtract.addEventListener("click", () => {
-isReset= false;
-resetOperators();
-isSubtract = true;
-saveVal(1);
-resetDisplay();
+subtractOperator();
 });
 
 
@@ -184,7 +207,11 @@ saveVal(1);
 resetDisplay();
 });
 
+btnDecimal.addEventListener("click", addDecimal);
+
 btnDEL.addEventListener("click", deleteDigit);
+
+btnNegative.addEventListener("click", convertNegative);
 
 //keyboard support
 document.addEventListener('keydown', (event) => {
@@ -215,11 +242,7 @@ if (event.code == "Digit0"){
     saveVal(1);
     resetDisplay();
 } else if (event.code == "NumpadSubtract"){
-    isReset= false;
-    resetOperators();
-    isSubtract = true;
-    saveVal(1);
-    resetDisplay();
+    subtractOperator();
 } else if (event.code == "NumpadMultiply"){
     isReset= false;
     resetOperators();
@@ -238,6 +261,8 @@ if (event.code == "Digit0"){
     fullReset();
 } else if (event.code == "Backspace"){
     deleteDigit();
+} else if (event.code == "Period"){
+    addDecimal();
 };
 });
 
@@ -259,18 +284,18 @@ updateDisplay();
 function updateDisplay(){
 if (numDisplay.hasChildNodes()){
 numDisplay.removeChild(numDisplayText);
-}
-numDisplayText = document.createTextNode(parseInt(displayValue));
+};
+numDisplayText = document.createTextNode(parseFloat(displayValue));
 numDisplay.appendChild(numDisplayText);
 };
 
 // memory storage
 function saveVal(value){
     if(value == 1){
-        firstValue = parseInt(displayValue);
+        firstValue = parseFloat(displayValue);
         console.log("first value = " + firstValue)
     } else if (value == 2){
-        secondValue = parseInt(displayValue);
+        secondValue = parseFloat(displayValue);
         console.log("first value = " + firstValue);
         console.log("second value = " + secondValue)
     }
