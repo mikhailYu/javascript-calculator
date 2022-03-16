@@ -269,6 +269,13 @@ if (event.code == "Digit0"){
 
 // number display
 
+function sliceLength(){
+    displayValue = displayValue.toString();
+    while (displayValue.length > 11){
+        displayValue = displayValue.slice(0, -1);
+        };
+};
+
 function numInput(inputMemory){
 if (isReset == false){
 displayValue = displayValue.toString();
@@ -285,6 +292,7 @@ function updateDisplay(){
 if (numDisplay.hasChildNodes()){
 numDisplay.removeChild(numDisplayText);
 };
+sliceLength();
 numDisplayText = document.createTextNode(parseFloat(displayValue));
 numDisplay.appendChild(numDisplayText);
 };
