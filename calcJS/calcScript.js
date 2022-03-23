@@ -270,7 +270,7 @@ if (event.code == "Digit0"){
 // number display
 
 function sliceLength(){
-    displayValue = displayValue.toString();
+    displayValue = displayValue.toString()
     while (displayValue.length > 11){
         displayValue = displayValue.slice(0, -1);
         };

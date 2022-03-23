@@ -1,61 +1,107 @@
+*
+{
+    background-color: rgb(185, 177, 103);
+}
+
+
 .calcCont,
 .numDisplay
 .btnCont,
-.btnCont > *
+.btnCont > * ,
+.btnCont > * > *,
+.numDisplay
 {
     display: flex;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .calcCont
 {
-    width: 500px;
-    height: 700px;
-    background-color: rgb(176, 219, 255);
+    width: 420px;
+    height: 630px;
+    background-color: #11251b;
     box-sizing: content-box;
     flex-direction: column;
     justify-items: center;
     margin: 0 auto;
-    border-radius: 30px;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    margin-top: 100px;
 
 }
+
 
 .numDisplay
 {
-    width: 450px;
-    height: 150px;
-    background-color: rgb(57, 159, 255);
-    font-size: 80px;
+    width: 380px;
+    height: 100px;
+    background-color: #51754d;
+    font-size: 55px;
     margin: 0 auto;
-    border-radius: 20px;
-    text-align: right;
-    align-content: space-around;
-    
-    
-    
-    
+    border-radius: 10px;
+    justify-content: right;
+    align-items: center;
+    color: #efffed;
+    padding-right: 10px;
+    font-family: monospace;
 }
+
+
+.btnCont > *
+{
+    flex-flow: row;
+    gap: 5px;
+    margin: 5px;
+    background-color: #11251b;
+}
+
+
 .btnCont > * > *
 {
-    font-size: 70px;
-    border: red solid 2px;
-    padding: 10px;
-    background-color: rgb(255, 255, 255);
+    font-size: 35px;
+    width: 90px;
+    height: 90px;
+    background-color: #9EA93F;
+    align-items: center;
+    justify-content: center;
+    border-radius:3px;
+    color: #112513;
+    font-family: sans-serif;
+    
 }
 
 .btnCont > * > *:hover
 {
-    background-color: rgb(104, 157, 255);
+    background-color: rgb(59, 167, 255);
 }
 
 .btnCont
 {
     margin: 0 auto;
     flex-direction: column;
+    background-color: #11251b;
 }
 
-.btnCont > *
+.btn0
 {
-    flex-flow: row;
+    width: 185px;
 }
 
 
+.btnClear,
+.btnDEL,
+.btnNegative,
+.btnDivide,
+.btnMultiply,
+.btnSubtract,
+.btnAdd,
+.btnEquals
+{
+    background-color: #7e9e27;
+    color: #181F1C;
+}
 
